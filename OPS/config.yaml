@@ -1,0 +1,63 @@
+# Configuration of the OPS scripts. Fill in the values for your experiment.
+
+experiment: null
+root_dir: null
+wells_file: wells.txt
+plates_file: plates.txt
+plate_format: null
+exclude_edge_rows: false
+col_ranges: null
+
+imaging:
+  fields_per_well: null
+  channels_per_cycle: null
+  extra_channels: {}
+  pixel_size_um: null
+  bit_depth: null
+
+sbs:
+  n_cycles: null
+  reference_cycle: null
+  input_dir: "{root}/{experiment}_OPS_SBS/{plate}"
+  folder_pattern: "{experiment}_OPS_SBS_{plate}_SBS_Cy{cycle}_*"
+
+phenotype:
+  n_cycles: null
+  input_dir: "{root}/{experiment}_OPS_Pheno/{plate}"
+  folder_pattern: "{experiment}_OPS_Pheno_{plate}_IF_Cy{cycle}_*"
+
+alignment:
+  correlation_threshold: 0.25
+
+segmentation:
+  stardist_model_dir: null
+  stardist_model_name: 2D_versatile_fluo
+  nuclei: {mode: Pheno, cycle: null, channel: null}
+  cytoplasm: {mode: Pheno, cycle: null, channel: null}
+  spot_cycles: null
+  min_dapi_intensity: 0.004
+  nuc_prob_thresh: 0.5
+  nuc_nms_thresh: 0.2
+  spot_prob_thresh: 0.15
+  spot_nms_thresh: 0.5
+  watershed: {adaptive_window: 100, smoothing_sigma: 3, correction_factor: 2, thresh_bounds: [0.0, 0.01], middle_to_foreground: true, fill_holes: true, compactness: 0.001, max_expansion_px: 45}
+
+barcode_calling:
+  training_cells: null
+  training_spots: null
+  whitelist: null
+  barcode_column: null
+  gene_columns: [Target_Gene_ID, Input]
+  plate_index: null
+
+normalization:
+  compartment: null
+  background:
+    cycle: null
+    channels: null
+    statistics: [mean, max]
+  qc:
+    min_dapi_max_fraction: 0.05
+    min_integrated_fraction: 0.3333
+    focus_mad_cutoff: 3
+  output: "{root}/gRNA_Zscore_profiles_{compartment}.parquet"
