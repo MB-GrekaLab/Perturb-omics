@@ -1,0 +1,22 @@
+# Environment for the OPS scripts. Versions are those of the cluster environment in which the scripts were run (Python 3.9.15).
+name: perturb-omics
+channels: [conda-forge]
+dependencies:
+  - python=3.9.15
+  - numpy=1.24.4
+  - pandas=1.5.2
+  - pyarrow=10.0.1
+  - scipy=1.8.1
+  - scikit-learn=1.4.1.post1
+  - scikit-image=0.19.3
+  - statsmodels=0.13.2
+  - pyyaml=6.0.1
+  - tifffile=2024.8.30
+  - tqdm=4.66.1
+  - dask=2023.10.0
+  - pip
+  - pip:
+      - palom==2023.9.2        # alignment (align.py)
+      - stardist==0.9.2        # segmentation (feature_extraction.py)
+      - csbdeep==0.8.1
+      - tensorflow==2.11.0
